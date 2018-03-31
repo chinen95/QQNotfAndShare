@@ -258,6 +258,8 @@ public class NotificationMonitorService extends NotificationListenerService {
         if(isGroupMsg)
             priority = Math.min(priority,Integer.parseInt(sp.getString("group_priority", "0")));
         priority = Math.min(notification.priority, priority);
+
+        long[] vibrates = {0, 500, 200, 500};
         Notification.Builder builder = new Notification.Builder(this)
                 //.setSubText(getString(getStringId(tag)))
                 .setContentTitle(title)
@@ -272,7 +274,8 @@ public class NotificationMonitorService extends NotificationListenerService {
                 .setPriority(setGroupSummary ? Notification.PRIORITY_MIN : priority)
                 //.setSound(notification.sound)
                 .setLights(notification.ledARGB, notification.ledOnMS, notification.ledOffMS)
-                .setVibrate(notification.vibrate)
+                //.setVibrate(notification.vibrate)
+                .setVibrate(vibrates)
                 .setShowWhen(true)
                 .setGroupSummary(setGroupSummary);
         setIcon(builder, tag, isQzone);
